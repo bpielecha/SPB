@@ -2,17 +2,19 @@ name: Build Python EXE
 
 on:
   push:
-    paths:
-      - 'Symulacja_Lab3.py'
+    branches:
+      - main
 
 jobs:
   build-windows-exe:
     runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
-      - uses: actions/setup-python@v4
+      - name: Setup Python
+        uses: actions/setup-python@v4
         with:
           python-version: '3.12'
 
