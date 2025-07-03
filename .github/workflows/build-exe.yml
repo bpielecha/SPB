@@ -1,0 +1,31 @@
+name: Build Python EXE
+
+on:
+  push:
+    paths:
+      - 'Symulacja_Lab3.py'
+
+jobs:
+  build-windows-exe:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install PyInstaller
+        run: python -m pip install --upgrade pip pyinstaller
+
+      - name: Build EXE
+        run: python -m PyInstaller --onefile --windowed Symulacja_Lab3.py
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Symulacja_Lab3-exe
+          path: dist/Symulacja_Lab3.exe
